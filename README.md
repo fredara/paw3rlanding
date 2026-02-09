@@ -8,6 +8,10 @@ Landing divertida y dinámica para **PAW3R** — ropa con actitud. Caracas, Vene
 - Efectos hover y animaciones
 - Todos los botones llevan a [paw3r.com](https://paw3r.com/)
 
+Si quieres ver la landing page: 
+https://paw3rlanding.vercel.app/
+
+
 ## Cómo correr el proyecto
 
 ```bash
