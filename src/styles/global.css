@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --color-accent: #f59e0b;
+  --color-accent2: #ec4899;
+  --color-accent3: #22d3ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* Ocultar solo los idiomas que NO coinciden con el activo (no usar [data-lang] { display: none }) */
+body[data-lang="es"] [data-lang="en"],
+body[data-lang="es"] [data-lang="ugo"],
+body[data-lang="en"] [data-lang="es"],
+body[data-lang="en"] [data-lang="ugo"],
+body[data-lang="ugo"] [data-lang="es"],
+body[data-lang="ugo"] [data-lang="en"] {
+  display: none !important;
+}
+
+/* Mostrar el idioma activo */
+body[data-lang="es"] [data-lang="es"],
+body[data-lang="en"] [data-lang="en"],
+body[data-lang="ugo"] [data-lang="ugo"] {
+  display: inline !important;
+}
+
+/* Hover lift */
+.hover-lift {
+  @apply transition-all duration-300 ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Hover scale */
+.hover-scale {
+  @apply transition-transform duration-300 ease-out;
+}
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* Hover glow */
+.hover-glow:hover {
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.4);
+}
+
+/* Hover border pop */
+.hover-border-pop {
+  @apply transition-all duration-200;
+}
+.hover-border-pop:hover {
+  box-shadow: 4px 4px 0 0 var(--color-accent);
+}
+
+/* Button bounce */
+.btn-bounce:active {
+  transform: scale(0.98);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  @apply overflow-hidden;
+}
+.img-zoom img {
+  @apply transition-transform duration-500 ease-out;
+}
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Stagger children: animación de entrada sin ocultar (evita pantalla en blanco) */
+.stagger-children > * {
+  animation: fadeUp 0.5s ease forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+@keyframes fadeUp {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

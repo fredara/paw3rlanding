@@ -1,0 +1,136 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'PAW3R' } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PAW3R — Ropa con actitud. Caracas, Venezuela. Creando un lifestyle para las próximas generaciones." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-paw-white text-paw-black antialiased min-h-screen overflow-x-hidden" style="font-family: 'DM Sans', system-ui, sans-serif;" data-lang="es">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --color-accent: #f59e0b;
+    --color-accent2: #ec4899;
+    --color-accent3: #22d3ee;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); }
+
+  /* Idiomas: ocultar solo los no activos */
+  body[data-lang="es"] [data-lang="en"],
+  body[data-lang="es"] [data-lang="ugo"],
+  body[data-lang="en"] [data-lang="es"],
+  body[data-lang="en"] [data-lang="ugo"],
+  body[data-lang="ugo"] [data-lang="es"],
+  body[data-lang="ugo"] [data-lang="en"] { display: none !important; }
+  body[data-lang="es"] [data-lang="es"],
+  body[data-lang="en"] [data-lang="en"],
+  body[data-lang="ugo"] [data-lang="ugo"] { display: inline !important; }
+
+  .hover-lift { transition: all 0.3s ease-out; }
+  .hover-lift:hover { transform: translateY(-4px); }
+  .hover-scale { transition: transform 0.3s ease-out; }
+  .hover-scale:hover { transform: scale(1.03); }
+  .hover-glow:hover { box-shadow: 0 0 24px rgba(245, 158, 11, 0.4); }
+  .hover-border-pop { transition: all 0.2s; }
+  .hover-border-pop:hover { box-shadow: 4px 4px 0 0 var(--color-accent); }
+  .btn-bounce:active { transform: scale(0.98); }
+  .img-zoom { overflow: hidden; }
+  .img-zoom img { transition: transform 0.5s ease-out; }
+  .img-zoom:hover img { transform: scale(1.08); }
+
+  /* Botón "Ir a la tienda": hover con imagen de referencia como fondo */
+  .btn-store-hero {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .btn-store-hero:hover {
+    background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/referencia.png');
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .btn-store-hero:not(:hover) {
+    background-image: none;
+  }
+
+  /* Logo: rotación 360° al hover */
+  .logo-link:hover img {
+    transform: rotate(360deg);
+  }
+
+  /* Botón Ugo: la imagen del avatar mantiene su fondo en hover (no se tiñe de blanco) */
+  .lang-btn-ugo .lang-btn-ugo-img {
+    background: #0a0a0a;
+    isolation: isolate;
+  }
+  .lang-btn-ugo:hover .lang-btn-ugo-img {
+    background: #0a0a0a;
+  }
+
+  /* Botón Ugo: efecto saltando para invitar a clicar */
+  .lang-btn-ugo-bounce {
+    animation: ugo-bounce 2s ease-in-out infinite;
+  }
+  .lang-btn-ugo-bounce:hover {
+    animation-play-state: paused;
+  }
+  @keyframes ugo-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* Product cards: hover mueve la imagen de lado a lado 1s (sin zoom) */
+  .product-card .product-card-img img {
+    transition: none;
+  }
+  .product-card:hover .product-card-img img {
+    animation: product-card-img-shake 1s ease-in-out;
+  }
+  @keyframes product-card-img-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+
+  /* Footer: crédito dev con hover divertido */
+  .footer-dev-link {
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  .footer-dev-link:hover {
+    transform: scale(1.15) rotate(-2deg);
+    color: var(--color-accent) !important;
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+  }
+  .footer-dev-link:active {
+    transform: scale(1.05) rotate(0deg);
+  }
+
+  .stagger-children > * { animation: fadeUp 0.5s ease forwards; }
+  .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+  @keyframes fadeUp {
+    from { transform: translateY(16px); }
+    to { transform: translateY(0); }
+  }
+</style>
